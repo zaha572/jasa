@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bra4sec - Jasa Hacking</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .noise-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .shape1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: -10%;
+            animation: float1 20s infinite ease-in-out;
+        }
+
+        .shape2 {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: -5%;
+            animation: float2 25s infinite ease-in-out;
+        }
+
+        .shape3 {
+            width: 150px;
+            height: 150px;
+            bottom: 10%;
+            left: 20%;
+            animation: float3 30s infinite ease-in-out;
+        }
+
+        @keyframes float1 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(100px, 100px) rotate(180deg); }
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-150px, -80px) rotate(-180deg); }
+        }
+
+        @keyframes float3 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(80px, -120px) rotate(180deg); }
+        }
+
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.05);
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-size: 4em;
+            letter-spacing: 15px;
+            margin-bottom: 15px;
+            font-weight: 300;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #ffffff, #999999, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            color: #999999;
+            font-size: 1.1em;
+            margin-top: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .section {
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .section h2 {
+            color: #ffffff;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 15px;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: #ffffff;
+            animation: slideRight 2s ease-in-out infinite;
+        }
+
+        @keyframes slideRight {
+            0%, 100% { transform: translateX(0); opacity: 0.5; }
+            50% { transform: translateX(100px); opacity: 1; }
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transition: 0.5s;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.1);
+        }
+
+        .service-title {
+            color: #ffffff;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            font-weight: 400;
+            letter-spacing: 2px;
+        }
+
+        .service-desc {
+            color: #999999;
+            margin-bottom: 20px;
+            line-height: 1.8;
+            font-size: 0.95em;
+        }
+
+        .price {
+            color: #ffffff;
+            font-size: 2em;
+            font-weight: 300;
+            margin-top: 20px;
+            letter-spacing: 2px;
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 50px;
+            text-align: center;
+        }
+
+        .contact-info {
+            font-size: 1.2em;
+            color: #cccccc;
+            margin: 20px 0;
+            letter-spacing: 1px;
+        }
+
+        .contact-label {
+            color: #ffffff;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .order-btn {
+            background: #ffffff;
+            color: #000000;
+            padding: 18px 50px;
+            border: 1px solid #ffffff;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: all 0.3s;
+            font-family: 'Courier New', monospace;
+        }
+
+        .order-btn:hover {
+            background: transparent;
+            color: #ffffff;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .feature-badge {
+            display: inline-block;
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 12px;
+            font-size: 0.75em;
+            margin: 5px 5px 15px 0;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .feature-badge:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffffff;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            margin-bottom: 50px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px;
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .stat-item:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3em;
+            color: #ffffff;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #999999;
+            font-size: 0.9em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .divider {
+            width: 50px;
+            height: 1px;
+            background: #ffffff;
+            margin: 30px auto;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .cursor {
+            animation: blink 1s infinite;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+                letter-spacing: 8px;
+            }
+            
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="noise-bg"></div>
+    <div class="grid-bg"></div>
+    <div class="floating-shapes">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>BIMA KEREN</h1>
+            <div class="divider"></div>
+            <div class="tagline">Professional Digital Services</div>
+        </header>
+
+        <div class="section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Projects Done</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Happy Clients</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Services</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-title">Web Development</div>
+                    <div class="feature-badge">Premium</div>
+                    <div class="feature-badge">Responsive</div>
+                    <div class="service-desc">
+                        Pembuatan website profesional dengan desain modern dan responsif. Menggunakan teknologi terkini untuk performa optimal dan user experience yang luar biasa.
+                    </div>
+                    <div class="price">Rp 2.500.000</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-title">Mobile App Development</div>
+                    <div class="feature-badge">iOS</div>
+                    <div class="feature-badge">Android</div>
+                    <div class="service-desc">
+                        Pengembangan aplikasi mobile native dan hybrid. Fitur lengkap dan performa tinggi untuk mendukung pertumbuhan bisnis Anda.
+                    </div>
+                    <div class="price">Rp 5.000.000</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-title">UI/UX Design</div>
+                    <div class="feature-badge">Modern</div>
+                    <div class="feature-badge">Creative</div>
+                    <div class="service-desc">
+                        Desain antarmuka user-friendly dengan fokus pada pengalaman pengguna. Prototype interaktif dan design guideline yang lengkap.
+                    </div>
+                    <div class="price">Rp 1.500.000</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-title">SEO Optimization</div>
+                    <div class="feature-badge">Ranking</div>
+                    <div class="feature-badge">Traffic</div>
+                    <div class="service-desc">
+                        Optimasi website untuk mesin pencari. Meningkatkan visibility dan traffic organik website Anda secara signifikan.
+                    </div>
+                    <div class="price">Rp 1.000.000</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-title">System Maintenance</div>
+                    <div class="feature-badge">24/7</div>
+                    <div class="feature-badge">Support</div>
+                    <div class="service-desc">
+                        Perawatan dan pemeliharaan sistem berkala. Monitoring, backup, dan security update secara rutin untuk menjaga stabilitas.
+                    </div>
+                    <div class="price">Rp 500.000/bulan</div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-title">Custom Software</div>
+                    <div class="feature-badge">Tailored</div>
+                    <div class="feature-badge">Scalable</div>
+                    <div class="service-desc">
+                        Pengembangan software khusus sesuai kebutuhan bisnis. Solusi enterprise dengan arsitektur yang scalable dan maintainable.
+                    </div>
+                    <div class="price">Mulai Rp 10.000.000</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section contact-box">
+            <h2>Contact</h2>
+            <div class="divider"></div>
+            <div class="contact-info">
+                <span class="contact-label">WhatsApp:</span> +62 812-3456-7890
+            </div>
+            <div class="contact-info">
+                <span class="contact-label">Email:</span> order@bimakeren.com
+            </div>
+            <div class="contact-info">
+                <span class="contact-label">Alamat:</span> Jl. Cyber Street No. 404, Godean, Yogyakarta
+            </div>
+            <button class="order-btn" onclick="window.open('https://wa.me/qr/YMDNFNJ3TYTOP1', '_blank')">
+                Order Now
+            </button>
+        </div>
+    </div>
+</body>
+</html>
